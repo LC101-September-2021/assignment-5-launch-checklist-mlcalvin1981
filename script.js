@@ -1,11 +1,9 @@
 window.addEventListener("load", function() {
+
     let document = window.document;
     let faultyItems = document.getElementById("faultyItems");
-    let pilotName= document.querySelector("input[name=pilotName]");
-    let copilotName = document.querySelector("input[name=copilotName]");
-    let fuelLevel = document.querySelector("input[name=fuelLevel]");
-    let cargoMass = document.querySelector("input[name=cargoMass]");
-
+    faultyItems.style.visibility = 'hidden'
+ 
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
     let listedPlanetsResponse = myFetch();
@@ -26,13 +24,24 @@ window.addEventListener("load", function() {
             missionTarget.moons,
             missionTarget.image
         );
-        formSubmission(
-            document,
-            faultyItems,
-            pilotName,
-            copilotName,
-            fuelLevel,
-            cargoMass
-        );
+        document.querySelector("form").addEventListener("submit", function(event) { 
+            let pilotName = document.querySelector("input[name=pilotName]");
+            let copilotName = document.querySelector("input[name=copilotName]");
+            let fuelLevel = document.querySelector("input[name=fuelLevel]");
+            let cargoMass = document.querySelector("input[name=cargoMass]");
+            console.log("!", pilotName.value);
+            console.log("!!", copilotName);
+            console.log("!!!", fuelLevel);
+            console.log("!!!!", cargoMass);
+            formSubmission(
+                document,
+                faultyItems,
+                pilotName.value,
+                copilotName.value,
+                fuelLevel.value,
+                cargoMass.value
+            );
+            event.preventDefault();
+        });
     });
 });
